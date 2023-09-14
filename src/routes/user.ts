@@ -1,6 +1,6 @@
 import express from 'express'
 import * as UserController from '../controllers/user.controller'
-import validateSignUp from 'middlewares/validations/validate'
+import validateSignUp from '../middlewares/validations/validate'
 
 const router = express.Router()
 
