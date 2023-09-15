@@ -2,7 +2,7 @@ import 'express-async-errors'
 import 'dotenv/config'
 import express, { Express, Request, Response } from 'express'
 import cors from 'cors'
-import { errorHandler, notFound } from './middlewares/errorHandler'
+import { errorHandler, notFound, logger } from './middlewares/errorHandler'
 import env from './utils/validateEnv'
 import helmet from 'helmet'
 import mongoSanitize from 'express-mongo-sanitize'
@@ -13,6 +13,8 @@ const app: Express = express()
 const port = env.PORT
 
 connectDB()
+app.use(logger)
+
 //To hide the framework used by the web server
 app.disable('x-powered-by')
 //security middlewares

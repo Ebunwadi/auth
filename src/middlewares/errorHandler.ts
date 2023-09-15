@@ -11,7 +11,7 @@ export const notFound: RequestHandler = (req, res, next) => {
   next(error)
 }
 
-export const logEvents = async (message: string, logFileName: string) => {
+const logEvents = async (message: string, logFileName: string) => {
   const dateTime = format(new Date(), 'yyyyMMdd\tHH:mm:ss')
   const logItem = `${dateTime}\t${uuid()}\t${message}\n`
 
@@ -23,6 +23,12 @@ export const logEvents = async (message: string, logFileName: string) => {
   } catch (err) {
     console.log(err)
   }
+}
+
+export const logger: RequestHandler = (req, res, next) => {
+  logEvents(`${req.method}\t${req.url}\t${req.headers.origin}`, 'reqLog.log')
+  // console.log(`${req.method} ${req.path}`)
+  next()
 }
 
 export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
