@@ -8,6 +8,8 @@ router.post('/signup', validate.validateSignUp, userController.signUp)
 
 router.post('/login', userController.login)
 
+router.post('/service', userController.serviceForm)
+
 router.post('/forgotPassword', validate.validateForgotPassword, userController.forgotPassword)
 
 router.patch('/resetPassword/:id/:token', validate.validateResetPassword, userController.passwordReset)

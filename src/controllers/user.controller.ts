@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import env from '../utils/validateEnv'
 import sendEmail from '../utils/sendEmail'
+import Service from '../models/Service'
 
 export const signUp: RequestHandler = async (req, res) => {
   const { username, email, password } = req.body
@@ -126,4 +127,22 @@ export const passwordReset: RequestHandler = async (req, res) => {
       message: 'Password Successfully Updated'
     }
   })
+}
+
+// contactform
+export const serviceForm: RequestHandler = async (req, res) => {
+  const { name, email, budgetPrice, services, comment, recommend, experience, improvement } = req.body
+
+  const service = await Service.create({
+    name,
+    email,
+    budgetPrice,
+    services,
+    comment,
+    recommend,
+    experience,
+    improvement
+  })
+
+  successMsg(201, 'success', service, res)
 }
